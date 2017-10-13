@@ -32,26 +32,26 @@ export class RouteHandlerComponent implements OnInit {
 
       switch (layout) {
         case 'alpha': {
-          this.store.dispatch(new SelectLayoutAction('alpha'));
-          break
-        }
+              this.store.dispatch(new SelectLayoutAction('alpha'));
+              break
+            }
 
         case 'beta': {
-          this.store.dispatch(new SelectLayoutAction('beta'));
-          break
+              this.store.dispatch(new SelectLayoutAction('beta'));
+              break
         }
 
         case 'gamma': {
-          this.store.dispatch(new SelectLayoutAction('gamma'));
-          break
+              this.store.dispatch(new SelectLayoutAction('gamma'));
+              break
         }
         case 'theta': {
-        this.store.dispatch(new SelectLayoutAction('theta'));
-        break
-        }
+                this.store.dispatch(new SelectLayoutAction('theta'));
+                break
+            }
         case 'epsilon': {
-        this.store.dispatch(new SelectLayoutAction('theta'));
-        break
+            this.store.dispatch(new SelectLayoutAction('theta'));
+            break
         }
       }
 
@@ -65,11 +65,20 @@ export class RouteHandlerComponent implements OnInit {
     // Define Menu Items here
 
     // Top Level Item (The item to click on so the dropdown opens)
+    const home = new SidenavItem({
+        name: 'Home',
+        icon: 'home',
+        route: '/',
+        subItems: [ ],
+        position: 1
+    });
+
+    // Top Level Item (The item to click on so the dropdown opens)
     const people = new SidenavItem({
-    name: 'People',
-    icon: 'people',
-    subItems: [ ],
-    position: 1
+        name: 'People',
+        icon: 'people',
+        subItems: [ ],
+        position: 1
     });
 
     const peopleSubItems = [
@@ -84,7 +93,17 @@ export class RouteHandlerComponent implements OnInit {
             }
         }),
         new SidenavItem({
-            name: 'Contacts',
+            name: 'Hiring Managers',
+            route: '/',
+            parent: people,
+            subItems: [ ],
+            position: 1,
+            routerLinkActiveOptions: {
+            exact: true
+            }
+        }),
+        new SidenavItem({
+            name: 'Recruiters',
             route: '/',
             parent: people,
             subItems: [ ],
@@ -93,7 +112,7 @@ export class RouteHandlerComponent implements OnInit {
             exact: true
             }
         })
-        ]
+    ]
 
 
 
@@ -117,11 +136,10 @@ export class RouteHandlerComponent implements OnInit {
     // Sub Items for the Top Level Item (The items shown when you clicked on the dropdown item)
     // Note: The Top Level Item is added as "parent" in those items, here "dashboard" (variable from above)
     const dashboardSubItems = [
-        
-
+       
       new SidenavItem({
         name: 'Dashboard',
-        route: '/',
+        route: '/system',
         parent: dashboard,
         subItems: [ ],
         position: 1,
@@ -407,6 +425,7 @@ export class RouteHandlerComponent implements OnInit {
     multiLevelMenuLevel4.subItems.push(multiLevelMenuLevel5);
 
     // Send the created Menu structure to Redux/ngrx (you only need to send the Top Level Item, all dropdown items will be added automatically)
+    this.store.dispatch(new sidenavAction.AddSidenavItemAction(home));
     this.store.dispatch(new sidenavAction.AddSidenavItemAction(people));
 
     this.store.dispatch(new sidenavAction.AddSidenavItemAction(dashboard));

@@ -5,7 +5,7 @@ import { DashboardStatisticsComponent } from './dashboard-statistics/dashboard-s
 
 export const dashboardRoutes: Routes = [
   {
-    path: '',
+    path: 'system',
     component: DashboardStatisticsComponent,
     pathMatch: 'full'
   },
