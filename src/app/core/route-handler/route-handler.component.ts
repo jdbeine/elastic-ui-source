@@ -45,6 +45,14 @@ export class RouteHandlerComponent implements OnInit {
           this.store.dispatch(new SelectLayoutAction('gamma'));
           break
         }
+        case 'theta': {
+        this.store.dispatch(new SelectLayoutAction('theta'));
+        break
+        }
+        case 'epsilon': {
+        this.store.dispatch(new SelectLayoutAction('theta'));
+        break
+        }
       }
 
       const elevation = params.get('elevation');
@@ -57,6 +65,44 @@ export class RouteHandlerComponent implements OnInit {
     // Define Menu Items here
 
     // Top Level Item (The item to click on so the dropdown opens)
+    const people = new SidenavItem({
+    name: 'People',
+    icon: 'people',
+    subItems: [ ],
+    position: 1
+    });
+
+    const peopleSubItems = [
+        new SidenavItem({
+            name: 'Candidates',
+            route: '/',
+            parent: people,
+            subItems: [ ],
+            position: 1,
+            routerLinkActiveOptions: {
+            exact: true
+            }
+        }),
+        new SidenavItem({
+            name: 'Contacts',
+            route: '/',
+            parent: people,
+            subItems: [ ],
+            position: 1,
+            routerLinkActiveOptions: {
+            exact: true
+            }
+        })
+        ]
+
+
+
+    // Push the just created Sub Items into the Top Level Item
+    people.subItems.push(...peopleSubItems);
+
+
+
+    // Top Level Item (The item to click on so the dropdown opens)
     const dashboard = new SidenavItem({
       name: 'Dashboard',
       icon: 'dashboard',
@@ -64,9 +110,15 @@ export class RouteHandlerComponent implements OnInit {
       position: 1
     });
 
+
+    
+    
+
     // Sub Items for the Top Level Item (The items shown when you clicked on the dropdown item)
     // Note: The Top Level Item is added as "parent" in those items, here "dashboard" (variable from above)
     const dashboardSubItems = [
+        
+
       new SidenavItem({
         name: 'Dashboard',
         route: '/',
@@ -92,6 +144,11 @@ export class RouteHandlerComponent implements OnInit {
         position: 1
       }),
     ];
+
+
+
+
+
 
     // Push the just created Sub Items into the Top Level Item
     dashboard.subItems.push(...dashboardSubItems);
@@ -350,6 +407,8 @@ export class RouteHandlerComponent implements OnInit {
     multiLevelMenuLevel4.subItems.push(multiLevelMenuLevel5);
 
     // Send the created Menu structure to Redux/ngrx (you only need to send the Top Level Item, all dropdown items will be added automatically)
+    this.store.dispatch(new sidenavAction.AddSidenavItemAction(people));
+
     this.store.dispatch(new sidenavAction.AddSidenavItemAction(dashboard));
     this.store.dispatch(new sidenavAction.AddSidenavItemAction(inbox));
     this.store.dispatch(new sidenavAction.AddSidenavItemAction(chat));

@@ -1,12 +1,13 @@
 <vr-tour></vr-tour>
 
+<!--
 <div class="buy-now-toolbar mat-elevation-z4" *ngIf="buyNowToolbarVisible">
   <div class="rainbow" fxLayout="row">
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
-      <div class="name" fxHide fxShow.gt-sm>elastic ui - Angular 4 Material Design + Redux/ngrx Admin Template - Save 1000s of hours designing and coding with this template</div>
-      <a href="https://themeforest.net/item/elastic-ui-angular-4-material-design-reduxngrx-admin-template/20513764?ref=visurel" class="action" md-raised-button color="primary">
+      <div class="name" fxHide fxShow.gt-sm>Welcome to our Recruiting Success Platform</div>
+      <a href="http://www.beineassociates.com" class="action" md-raised-button color="primary">
         <md-icon class="icon">shopping_basket</md-icon>
-        GET IT HERE
+        RECRUITERS HERE!
       </a>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -16,6 +17,7 @@
     </div>
   </div>
 </div>
+-->
 
 <md-sidenav-container class="layout-container" [ngClass]="cardElevation$ | async">
 
@@ -29,8 +31,19 @@
        [class.alpha]="layout === 'alpha'"
        [class.beta]="layout === 'beta'"
        [class.gamma]="layout === 'gamma'"
-       [class.boxed]="layoutBoxed$ | async">
+       [class.theta]="layout === 'theta'"
 
+       [class.boxed]="layoutBoxed$ | async">
+    
+      
+      <!-- Layout theta -->
+    <vr-toolbar-beta *ngIf="layout === 'theta'"
+                     [quickpanelOpen]="quickpanelOpen$ | async"
+                     (toggledSidenav)="toggleSidenav()" (toggledQuickpanel)="toggleQuickpanel()">
+    </vr-toolbar-beta>
+    <!-- /Layout: theta -->
+      
+      
     <!-- Layout Beta -->
     <vr-toolbar-beta *ngIf="layout === 'beta'"
                      [quickpanelOpen]="quickpanelOpen$ | async"
